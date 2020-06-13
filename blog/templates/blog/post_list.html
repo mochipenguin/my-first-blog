@@ -1,33 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>MochiPenguin</title>
-</head>
-<body>
-     <div>
-         <h1><a href="">MochiPenguin's secret base</a></h1>
-     </div>
+    {% extends 'blog/base.html' %}
 
-     {% for post in posts %}
-        <div>
-            <h1><a href="">{{ post.title }}</a> </h1>
-            <p>{{ post.text|linebreaksbr }}</p>
-            <p>published: {{ post.published_date}}</p>
-        </div>
-     {% endfor %}
-
-     <div>
-         <h2><a href="">My first post</a></h2>
-         <p>Hello, I'm a little penguin. Someone called me '麻薯', so... That's my name! I like this name~</p>
-         <p>published: 16.05.2020, 16:40</p>
-
-     <div>
-         <h2><a href="">My second post</a></h2>
-         <p>How can I say '麻薯' in English? Deep-Fried Glutinous Rice Cake Stuffed with Bean Paste? So long and not cute...</p>
-         <p>published: 16.05.2020, 16:40</p>
-     </div>
-
-</body>
-</html>
-
+    {% block content %}
+        {% for post in posts %}
+            <div class="post">
+                <div class="date">
+                    {{ post.published_date }}
+                </div>
+                <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+                <p>{{ post.text|linebreaksbr }}</p>
+            </div>
+        {% endfor %}
+    {% endblock %}
